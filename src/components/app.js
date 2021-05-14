@@ -8,23 +8,32 @@ class App extends Component
   state = 
   {
     error: "",
+    //requestInfo es consulta en el tutorial
     requestInfo: {},
+    //otheresult es resultado en el tutorial 
     otheresult: {}
   }
   
   
+  
+  componentDidUpdate(prevProps, prevState)
+  {
+    if(prevState.requestInfo !== this.state.requestInfo ) //return this.reqApi(); 
+    {
+      this.reqApi();
+    }
+    
+    /*
+    console.log("Props")
+    console.log(prevProps);
+    console.log("State");
+    console.log(prevState);
+    */
+  }
   componentDidMount() 
   {
     this.setState({error: false})
   }
-  
-  componentDidUpdate(prevState, prevProps)
-  {
-    if(prevState.requestInfo !== this.state.requestInfo)
-    {
-      this.reqApi();
-    }
-  } 
   
   reqApi = () =>
   {
@@ -58,8 +67,10 @@ class App extends Component
   render()  
   {
     const error = this.state.error;
+
     let result;
-    if (error)
+
+    if(error)
     {
       result = <Error message="ambos campos son obligatorios" />;
     }else
@@ -67,7 +78,7 @@ class App extends Component
       result = <Clima otheresult={this.state.otheresult}/>
     }
     return (
-      <div>
+      <div className="app">
         <Header title="React Weather" />
         <Form getData={this.getData}  />
         {result}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 class Form extends Component
 {
 
@@ -18,7 +18,6 @@ class Form extends Component
             city: this.cityRef.current.value,
             country: this.countryRef.current.value
         }
-        console.log(answer);
         // enviar por props
         this.props.getData(answer);
         // resetear el form
@@ -59,5 +58,9 @@ class Form extends Component
             </div>
         )
     }
+}
+Form.propTypes=
+{
+    getData: PropTypes.func.isRequired
 }
 export default Form;
